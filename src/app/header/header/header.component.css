@@ -1,0 +1,11 @@
+.header {
+  justify-content: space-evenly;
+  text-align: center;
+  background: #d19a43;
+  color: #fff;
+  padding: 12px;
+}
+
+a {
+  color: #000000;
+}

@@ -1,0 +1,22 @@
+<div class="confirmation-container">
+  <div class="confirmation header">
+    <h1>Your purchase was Successful!</h1>
+    <div class="confirmation-items">
+      <div class="confirmation-item">
+        <br />
+        <p>
+          Thank you, <b>{{ customerName }}</b> for choosing MyStore
+        </p>
+        <br />
+        <p>
+          Your order is confirmed and your total is <b>$ {{ orderTotal }}</b>
+        </p>
+        <br />
+        <p>Your order will arrive within 2-5 business days</p>
+        <button (click)="route.navigate(['/'])" class="btn btn-primary">
+          Back to Inventory Page
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

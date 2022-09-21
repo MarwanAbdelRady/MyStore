@@ -1,0 +1,67 @@
+<div class="empty-cart-message" *ngIf="items.length == 0">
+  Your Shopping Cart is Empty 😔
+</div>
+<div *ngIf="items.length > 0" class="cart-container">
+  <div class="cart-panel" *ngFor="let item of items">
+    <div class="cart-item">
+      <img src="{{ item.product.url }}" alt="" />
+      <div class="cart-item-details">
+        <h5>{{ item.product.name }}</h5>
+        <p>$ {{ item.product.price }}</p>
+        <label for="amount">Amount: </label>
+        <input
+          type="number"
+          [(ngModel)]="item.quantity"
+          (ngModelChange)="update()"
+          class="number-input"
+        />
+      </div>
+    </div>
+  </div>
+  <p>
+    <b>Total: $ {{ orderTotal.toString() }}</b>
+  </p>
+</div>
+<form #form="ngForm" *ngIf="items.length > 0" (ngSubmit)="submit()">
+  <div class="input-container">
+    <label for="customerName"><b>Name</b></label>
+    <input
+      type="text"
+      class="form-margin"
+      id="customerName"
+      required
+      [(ngModel)]="customerName"
+      name="customerName"
+      minlength="6"
+      placeholder="Min. 6 characters"
+    /><br />
+    <label for="address"><b>Address</b></label>
+    <input
+      type="text"
+      class="form-margin"
+      id="address"
+      required
+      [(ngModel)]="address"
+      name="address"
+      minlength="20"
+      placeholder="Min. 20 characters"
+    /><br />
+    <label for="customerName"><b>Credit card Number</b></label>
+    <input
+      type="text"
+      class="form-margin"
+      id="creditCardNumber"
+      placeholder="(16 digit number)"
+      [(ngModel)]="creditCardNumber"
+      required
+      name="creditCardNumber"
+      pattern="[0-9]{16}"
+      title="Please enter a 16-digit Number"
+    />
+
+    <br />
+    <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">
+      Submit
+    </button>
+  </div>
+</form>
