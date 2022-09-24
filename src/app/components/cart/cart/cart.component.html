@@ -14,7 +14,11 @@
           [(ngModel)]="item.quantity"
           (ngModelChange)="update()"
           class="number-input"
+          min="1"
         />
+        <button class="btn btn-danger" (click)="removeItemFromCart(item)">
+          Remove
+        </button>
       </div>
     </div>
   </div>
@@ -24,42 +28,59 @@
 </div>
 <form #form="ngForm" *ngIf="items.length > 0" (ngSubmit)="submit()">
   <div class="input-container">
-    <label for="customerName"><b>Name</b></label>
+    <label for="customerNameInput"><b>Name</b></label>
     <input
       type="text"
       class="form-margin"
-      id="customerName"
+      id="customerNameInput"
       required
       [(ngModel)]="customerName"
-      name="customerName"
+      name="customerNameInput"
       minlength="6"
       placeholder="Min. 6 characters"
+      #customerNameInput="ngModel"
     /><br />
-    <label for="address"><b>Address</b></label>
+    <div
+      id="CustomerNameError"
+      *ngIf="customerNameInput.invalid && customerNameInput.dirty"
+    >
+      <p *ngIf="customerNameInput.errors?.['required']">
+        Your Full name is required.
+      </p>
+      <p *ngIf="customerNameInput.errors?.['minlength']">Name is too short.</p>
+    </div>
+    <label for="addressInput"><b>Address</b></label>
     <input
       type="text"
       class="form-margin"
-      id="address"
+      id="addressInput"
       required
       [(ngModel)]="address"
-      name="address"
+      name="addressInput"
       minlength="20"
       placeholder="Min. 20 characters"
+      #addressInput="ngModel"
     /><br />
-    <label for="customerName"><b>Credit card Number</b></label>
+    <div id="addressError" *ngIf="addressInput.invalid && addressInput.dirty">
+      <p class="text-danger" *ngIf="addressInput.errors?.['required']">
+        Your Address is required.
+      </p>
+      <p class="text-danger" *ngIf="addressInput.errors?.['minlength']">
+        Address is too short.
+      </p>
+    </div>
+    <label for="creditCardNumberInput"><b>Credit card Number</b></label>
     <input
       type="text"
       class="form-margin"
-      id="creditCardNumber"
+      id="creditCardNumberInput"
       placeholder="(16 digit number)"
       [(ngModel)]="creditCardNumber"
       required
-      name="creditCardNumber"
+      name="creditCardNumberInput"
       pattern="[0-9]{16}"
       title="Please enter a 16-digit Number"
-    />
-
-    <br />
+    /><br />
     <button type="submit" class="btn btn-primary" [disabled]="!form.form.valid">
       Submit
     </button>

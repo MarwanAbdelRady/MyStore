@@ -36,11 +36,11 @@ export class CartComponent implements OnInit {
   }
 
   removeItemFromCart(item: Cart): void {
-    if (confirm(`are you sure want to remove ${item.product.name}?!`)) {
+    if (confirm(`Are you sure want to remove ${item.product.name}?`)) {
       this.cartService.removeCartItem(item);
       this.items = this.cartService.getCartItems();
       this.calculateOrderTotal();
-      alert(`${item.product.name} removed.`);
+      alert(`${item.product.name} removed from Shopping Cart.`);
     }
   }
 
